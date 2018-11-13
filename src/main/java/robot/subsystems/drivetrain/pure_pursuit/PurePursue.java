@@ -15,6 +15,8 @@ public class PurePursue extends Command {
     private int direction; //whether the robot drives forward or backwards (-1 or 1)
     private double lastLeftSpeed; //the last speed of the left encoder
     private double lastRightSpeed; //the last speed of the right encoder
+    private double lastLeftSpeedOutput; //the last voltage output to the motor
+    private double lastRightSpeedOutput; //the last voltage output to the motor
     private double lastLeftEncoder; //the last distance of the left encoder
     private double lastRightEncoder; //the last distance of the right encoder
     //private double initAngle;
@@ -60,7 +62,10 @@ public class PurePursue extends Command {
     protected void execute() {
         updatePoint();
         updateLookaheadInPath(path);
-        drive.setSpeed(getLeftSpeedVoltage(path), getRightSpeedVoltage(path));
+        lastLeftSpeedOutput = limitRate(getLeftSpeedVoltage(path), lastLeftSpeedOutput, robot.subsystems.drivetrain.Constants.MAX_RATE);
+        lastRightSpeedOutput = limitRate(getRightSpeedVoltage(path), lastRightSpeedOutput, robot.subsystems.drivetrain.Constants.MAX_RATE);
+
+        drive.setSpeed(lastLeftSpeedOutput, lastRightSpeedOutput);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -219,6 +224,20 @@ public class PurePursue extends Command {
                 Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
     }
 
+    /**
+     * Takes the current output, and gradually raises it to the target velocity, while making sure it doesn't change
+     * in a rate that is faster than the maximum acceleration rate.
+     *
+     * @param input the target velocity.
+     * @param lastOutput current output.
+     * @param limitRate maximum acceleration rate
+     * @return returns an updated output.
+     * @author Paulo
+     */
+    public double limitRate(double input, double lastOutput, double limitRate) {
+        double maxChange = 0.02 * limitRate;
+        return lastOutput + Math.min(-maxChange, Math.max(input - lastOutput, maxChange));
+    }
 
     /**
      * calculates the speed needed in the right wheel and makes so we can apply it straight to the right engine
