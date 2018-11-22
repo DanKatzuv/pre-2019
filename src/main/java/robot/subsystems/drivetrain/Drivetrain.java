@@ -34,10 +34,32 @@ public class Drivetrain extends Subsystem {
         rightEncoder.setDistancePerPulse(Constants.PULSE_PER_DISTANCE);
         leftForward.setInverted(Constants.LEFT_REVERSED);
         rightForward.setInverted(Constants.RIGHT_REVERSED);
+//configure the victors constants
+        leftBack.config_kP(0, Constants.kP, Constants.TimeOutMS);
+        leftBack.config_kD(0, Constants.kD, Constants.TimeOutMS);
+        leftBack.config_kI(0, Constants.kI, Constants.TimeOutMS);
+        leftBack.config_kF(0, Constants.kF, Constants.TimeOutMS);
+        leftBack.setSensorPhase(Constants.LEFT_REVERSED);
+        leftForward.config_kP(0, Constants.kP, Constants.TimeOutMS);
+        leftForward.config_kD(0, Constants.kD, Constants.TimeOutMS);
+        leftForward.config_kI(0, Constants.kI, Constants.TimeOutMS);
+        leftForward.config_kF(0, Constants.kF, Constants.TimeOutMS);
+        leftForward.setSensorPhase(Constants.LEFT_REVERSED);
+        rightBack.config_kP(0, Constants.kP, Constants.TimeOutMS);
+        rightBack.config_kD(0, Constants.kD, Constants.TimeOutMS);
+        rightBack.config_kI(0, Constants.kI, Constants.TimeOutMS);
+        rightBack.config_kF(0, Constants.kF, Constants.TimeOutMS);
+        rightBack.setSensorPhase(Constants.RIGHT_REVERSED);
+        rightForward.config_kP(0, Constants.kP, Constants.TimeOutMS);
+        rightForward.config_kD(0, Constants.kD, Constants.TimeOutMS);
+        rightForward.config_kI(0, Constants.kI, Constants.TimeOutMS);
+        rightForward.config_kF(0, Constants.kF, Constants.TimeOutMS);
+        rightForward.setSensorPhase(Constants.RIGHT_REVERSED);
     }
 
     @Override
     public void initDefaultCommand() {
+
         setDefaultCommand(new JoystickDrive());
     }
 
