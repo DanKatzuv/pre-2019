@@ -37,6 +37,7 @@ function getPointByAngle(angle, middlePt, isRight, r, a, b) {
     var Xtmp;
     if (isRight) {
         Xtmp = r / Math.sin(a) + r * Math.cos(angle);
+
     } else {
         Xtmp = -r / Math.sin(a) + r * Math.cos(angle);
     }
@@ -51,7 +52,7 @@ function getRotationPoints(startPt, middlePt, endPt, r, step) {
     var b = getXYAngle(middlePt, startPt);
     var c = getXYAngle(middlePt, endPt);
     var a = getAngleBetween(b, c);
-    if (a == pi / 2)
+    if (a === parameters.tolerance )
         return [middlePt];
     var isRight = a < pi / 2;
     var startAngle, endAngle;
@@ -66,7 +67,7 @@ function getRotationPoints(startPt, middlePt, endPt, r, step) {
     var rotationPoints = [];
     if (isRight) {
         for (var angle = startAngle; angle > endAngle; angle -= step) {
-            rotationPoints.push(getPointByAngle(angle, middlePt, isRight, r, a, b));
+            if (getDist(startPt,endAngle)> parameters.weightData) rotationPoints.push(getPointByAngle(angle, middlePt, isRight, r, a, b));
         }
     } else {
         for (var angle = startAngle; angle < endAngle; angle += step) {
@@ -74,5 +75,7 @@ function getRotationPoints(startPt, middlePt, endPt, r, step) {
         }
     }
     rotationPoints.push(getPointByAngle(endAngle, middlePt, isRight, r, a, b));
-    return rotationPoints;
-}
+    return rotationPoints;}
+
+
+
