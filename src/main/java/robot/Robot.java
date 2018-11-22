@@ -39,6 +39,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotInit() {
+
         m_oi = new OI();
         //m_chooser.setDefaultOption("Default Auto", new JoystickDrive());
         // chooser.addOption("My Auto", new MyAutoCommand());
@@ -85,6 +86,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousInit() {
+        navx.reset();
         drivetrain.resetEncoders();
         m_autonomousCommand = m_chooser.getSelected();
 

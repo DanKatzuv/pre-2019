@@ -1,8 +1,8 @@
 package robot.subsystems.drivetrain.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import robot.Robot;
+import robot.subsystems.drivetrain.Constants;
 import robot.subsystems.drivetrain.Drivetrain;
 
 /**
@@ -16,6 +16,7 @@ public class TurnByAngle extends Command {
     private double degreesError;
     private double angle;
     private boolean isRelative;
+    private double arcLength; //length of the path
     private Drivetrain drive = Robot.drivetrain;
 
     public TurnByAngle(double angle, boolean isRelative) {
@@ -24,15 +25,16 @@ public class TurnByAngle extends Command {
         requires(drive);
     }
 
-    protected void initialize(){
+    protected void initialize() {
         startAngle = drive.getAngle();
 
-        if(isRelative){
+        if (isRelative) {
+            this.desiredAngle = angle + drive.getAngle();
+        } else {
             this.desiredAngle = angle;
         }
-        // convert to radians
-        this.desiredAngle = Math.toRadians(this.desiredAngle);
-        this.startAngle = Math.toRadians(this.startAngle);
+        this.arcLength = (Constants.ROBOT_WIDTH * Math.PI) * (desiredAngle - startAngle) / 360;
+
     }
 
     // Called repeatedly when this Command is scheduled to run
