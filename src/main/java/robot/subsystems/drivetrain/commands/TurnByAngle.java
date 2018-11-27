@@ -1,5 +1,6 @@
 package robot.subsystems.drivetrain.commands;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.command.Command;
 import robot.Robot;
 import robot.subsystems.drivetrain.Constants;
@@ -39,6 +40,14 @@ public class TurnByAngle extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        if (desiredAngle <= degreesError) {
+            System.out.println("degree too small");
+        } else {
+            while (desiredAngle > angle) {
+                Robot.drivetrain.rightForward.set(ControlMode.PercentOutput, arcLength);
+                Robot.drivetrain.leftForward.set(ControlMode.PercentOutput, -1 * arcLength);
+            }
+        }
     }
 
     // Make this return true when this Command no longer needs to run execute()
