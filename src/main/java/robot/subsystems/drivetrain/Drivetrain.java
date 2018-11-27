@@ -8,6 +8,7 @@
 package robot.subsystems.drivetrain;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.Encoder;
@@ -29,6 +30,8 @@ public class Drivetrain extends Subsystem {
     private final Encoder leftEncoder = new Encoder(Ports.leftEncoderChannelA, Ports.leftEncoderChannelB);
     private final Encoder rightEncoder = new Encoder(Ports.rightEncoderChannelA, Ports.rightEncoderChannelB);
     public Point currentLocation;
+    public int rightForwardPos = rightForward.getSensorCollection().getPulseWidthPosition();
+    public int leftForwardPos = leftForward.getSensorCollection().getPulseWidthPosition();
 
     public Drivetrain() {
         leftEncoder.setDistancePerPulse(Constants.PULSE_PER_DISTANCE);
@@ -50,6 +53,13 @@ public class Drivetrain extends Subsystem {
         //configure victors to follow  Talon
         rightBack.follow(rightForward);
         leftBack.follow(leftBack);
+
+        //config sensors to Talons
+        rightForward.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, Constants.TimeOutMS);
+        leftForward.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, Constants.TimeOutMS);
+
+
+
     }
 
     @Override
