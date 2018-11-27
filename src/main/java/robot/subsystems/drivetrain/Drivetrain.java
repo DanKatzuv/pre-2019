@@ -23,9 +23,9 @@ import robot.subsystems.drivetrain.pure_pursuit.Point;
 
 
 public class Drivetrain extends Subsystem {
-    private final TalonSRX leftForward = new TalonSRX(Ports.leftForwardMotor);
+    public final TalonSRX leftForward = new TalonSRX(Ports.leftForwardMotor);
     private final VictorSPX leftBack = new VictorSPX(Ports.leftBackMotor);
-    private final TalonSRX rightForward = new TalonSRX(Ports.rightForwardMotor);
+    public final TalonSRX rightForward = new TalonSRX(Ports.rightForwardMotor);
     private final VictorSPX rightBack = new VictorSPX(Ports.rightBackMotor);
     private final Encoder leftEncoder = new Encoder(Ports.leftEncoderChannelA, Ports.leftEncoderChannelB);
     private final Encoder rightEncoder = new Encoder(Ports.rightEncoderChannelA, Ports.rightEncoderChannelB);
