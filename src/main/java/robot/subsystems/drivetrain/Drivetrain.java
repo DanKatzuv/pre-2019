@@ -8,6 +8,7 @@
 package robot.subsystems.drivetrain;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -21,9 +22,9 @@ import robot.subsystems.drivetrain.pure_pursuit.Point;
 
 
 public class Drivetrain extends Subsystem {
-    private final VictorSPX leftForward = new VictorSPX(Ports.leftForwardMotor);
+    private final TalonSRX leftForward = new TalonSRX(Ports.leftForwardMotor);
     private final VictorSPX leftBack = new VictorSPX(Ports.leftBackMotor);
-    private final VictorSPX rightForward = new VictorSPX(Ports.rightForwardMotor);
+    private final TalonSRX rightForward = new TalonSRX(Ports.rightForwardMotor);
     private final VictorSPX rightBack = new VictorSPX(Ports.rightBackMotor);
     private final Encoder leftEncoder = new Encoder(Ports.leftEncoderChannelA, Ports.leftEncoderChannelB);
     private final Encoder rightEncoder = new Encoder(Ports.rightEncoderChannelA, Ports.rightEncoderChannelB);
@@ -35,26 +36,20 @@ public class Drivetrain extends Subsystem {
         leftForward.setInverted(Constants.LEFT_REVERSED);
         rightForward.setInverted(Constants.RIGHT_REVERSED);
 //configure the victors constants
-        leftBack.config_kP(0, Constants.kP, Constants.TimeOutMS);
-        leftBack.config_kD(0, Constants.kD, Constants.TimeOutMS);
-        leftBack.config_kI(0, Constants.kI, Constants.TimeOutMS);
-        leftBack.config_kF(0, Constants.kF, Constants.TimeOutMS);
-        leftBack.setSensorPhase(Constants.LEFT_REVERSED);
         leftForward.config_kP(0, Constants.kP, Constants.TimeOutMS);
         leftForward.config_kD(0, Constants.kD, Constants.TimeOutMS);
         leftForward.config_kI(0, Constants.kI, Constants.TimeOutMS);
         leftForward.config_kF(0, Constants.kF, Constants.TimeOutMS);
         leftForward.setSensorPhase(Constants.LEFT_REVERSED);
-        rightBack.config_kP(0, Constants.kP, Constants.TimeOutMS);
-        rightBack.config_kD(0, Constants.kD, Constants.TimeOutMS);
-        rightBack.config_kI(0, Constants.kI, Constants.TimeOutMS);
-        rightBack.config_kF(0, Constants.kF, Constants.TimeOutMS);
-        rightBack.setSensorPhase(Constants.RIGHT_REVERSED);
         rightForward.config_kP(0, Constants.kP, Constants.TimeOutMS);
         rightForward.config_kD(0, Constants.kD, Constants.TimeOutMS);
         rightForward.config_kI(0, Constants.kI, Constants.TimeOutMS);
         rightForward.config_kF(0, Constants.kF, Constants.TimeOutMS);
         rightForward.setSensorPhase(Constants.RIGHT_REVERSED);
+
+        //configure victors to follow  Talon
+        rightBack.follow(rightForward);
+        leftBack.follow(leftBack);
     }
 
     @Override
