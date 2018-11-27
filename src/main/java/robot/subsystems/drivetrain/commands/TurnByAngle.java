@@ -44,8 +44,8 @@ public class TurnByAngle extends Command {
             System.out.println("degree too small");
         } else {
             while (desiredAngle > angle) {
-                Robot.drivetrain.rightForward.set(ControlMode.PercentOutput, arcLength);
-                Robot.drivetrain.leftForward.set(ControlMode.PercentOutput, -1 * arcLength);
+                Robot.drivetrain.rightForward.set(ControlMode.Position, arcLength);
+                Robot.drivetrain.leftForward.set(ControlMode.Position, -1 * arcLength);
             }
         }
     }
