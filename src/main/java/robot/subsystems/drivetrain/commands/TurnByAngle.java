@@ -35,6 +35,12 @@ public class TurnByAngle extends Command {
         }
         this.arcLength = ((Constants.ROBOT_WIDTH * Math.PI) * ((desiredAngle - startAngle)) % 360 / 360);
 
+        //if the arc length is bigger than half rotation it will
+        if (arcLength / (Constants.ROBOT_WIDTH * Math.PI) >= 0.5) {
+            this.arcLength = -0.5 * (arcLength % (Constants.ROBOT_WIDTH * Math.PI));
+        } else {
+            this.arcLength = (arcLength % (Constants.ROBOT_WIDTH * Math.PI));
+        }
     }
 
     // Called repeatedly when this Command is scheduled to run
