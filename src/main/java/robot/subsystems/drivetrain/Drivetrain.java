@@ -153,4 +153,21 @@ public class Drivetrain extends Subsystem {
         return Robot.navx.getRoll();
     }
 
+    /**
+     * @param dist the distance you wanna  go
+     * @author orel
+     */
+    public void SetRightPos(double dist) {
+        rightForward.set(ControlMode.MotionMagic, dist);
+
+    }
+
+    /**
+     * @param dist the distance you wanna  go
+     * @author orel
+     */
+    public void SetLeftPos(double dist) {
+        leftForward.set(ControlMode.MotionMagic, dist);
+    }
+
 }
