@@ -10,7 +10,7 @@ public class Constants {
     public static final double kI = 0;
     public static final double kF = 0.2481;
     static final double PULSE_PER_DISTANCE = 0.003451;
-    public static final double ROBOT_WIDTH = 0;
+    public static final double ROBOT_WIDTH = 0.1;
     public static final double MAX_RATE = 0.3; //the maximum voltage acceleration (rate of change of the motor voltage per second)
 
 }
