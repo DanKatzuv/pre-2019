@@ -10,6 +10,12 @@ import robot.subsystems.TurretTurn.TurretTurn;
  *
  */
 public class TurnByAngle extends Command {
+    private double desiredAngle;
+    private double startAngle;
+    private double angle;
+    private double arcLength;
+    private boolean isRelative;
+    private TurretTurn turretTurn = Robot.turretTurn;
 
     public TurnByAngle() {
         // Use requires() here to declare subsystem dependencies
