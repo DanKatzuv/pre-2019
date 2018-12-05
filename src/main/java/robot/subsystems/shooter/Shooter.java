@@ -7,15 +7,33 @@
 
 package robot.subsystems.shooter;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * An example subsystem.  You can replace me with your own Subsystem.
+ *
  */
 public class Shooter extends Subsystem {
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
+    private final VictorSPX victorMotor = new VictorSPX(Ports.victorMotor);
+    private final TalonSRX talonMotor = new TalonSRX(Ports.talonMotor);
 
+    public Shooter(){
+        talonMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, Constants.kPIDLoopIdx, 0); //Turns the units of the talon to correspond to 1440 encoder units.
+
+        talonMotor.configNominalOutputForward(0, Constants.kTimeoutMs); //nominal motor speed
+        talonMotor.configNominalOutputReverse(0, Constants.kTimeoutMs);
+        talonMotor.configPeakOutputForward(1, Constants.kTimeoutMs); //the motor cannot exceed this value
+        talonMotor.configPeakOutputReverse(-1, Constants.kTimeoutMs);
+
+        /* set closed loop gains in slot0 */
+        talonMotor.config_kP(Constants.kPIDLoopIdx, Constants.kP, Constants.kTimeoutMs);
+        talonMotor.config_kI(Constants.kPIDLoopIdx, Constants.kI, Constants.kTimeoutMs);
+        talonMotor.config_kD(Constants.kPIDLoopIdx, Constants.kD, Constants.kTimeoutMs);
+        talonMotor.config_kF(Constants.kPIDLoopIdx, Constants.kF, Constants.kTimeoutMs);
+    }
     @Override
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
