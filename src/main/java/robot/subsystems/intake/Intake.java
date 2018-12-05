@@ -78,6 +78,7 @@ public class Intake extends Subsystem {
     public void endAllMotors() {
         rightIntake.set(0);
         leftIntake.set(0);
+        folding.set(0);
     }
 
     //INTAKE POSITION DEGREE
