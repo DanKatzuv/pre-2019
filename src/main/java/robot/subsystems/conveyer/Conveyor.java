@@ -10,25 +10,29 @@ package robot.subsystems.conveyer;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import robot.subsystems.conveyer.Commands.TriserionCommand;
+import robot.subsystems.conveyer.Commands.ConveyorCommand;
 
 /**
  * An example subsystem.  You can replace me with your own Subsystem.
  */
-public class ConveyerTRISERION extends Subsystem {
+public class Conveyor extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-    private final VictorSPX ConveyerRotation = new VictorSPX(Ports.ConRotation);
+    private final VictorSPX conveyorRotation = new VictorSPX(Ports.ConRotation);
+    private final VictorSPX conveyorForShooter = new VictorSPX(Ports.ConToSHOOTER);
 
-    public ConveyerTRISERION(){
-        ConveyerRotation.setInverted(false);
+
+    public Conveyor() {
+        conveyorRotation.setInverted(false);
+
+        conveyorForShooter.setInverted(false);
     }
 
     @Override
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         // setDefaultCommand(new MySpecialCommand());
-        setDefaultCommand(new TriserionCommand());
+        setDefaultCommand(new ConveyorCommand());
     }
 
     /**
@@ -36,9 +40,12 @@ public class ConveyerTRISERION extends Subsystem {
      * @param speed the speed for the motor
      */
     public void SetSpeedForRotation(double speed){
-        ConveyerRotation.set(ControlMode.PercentOutput,speed);
+        conveyorRotation.set(ControlMode.PercentOutput, speed);
     }
 
+    public void setSpeed(double speed) {
+        conveyorForShooter.set(ControlMode.PercentOutput, speed);
+    }
 
 
 }

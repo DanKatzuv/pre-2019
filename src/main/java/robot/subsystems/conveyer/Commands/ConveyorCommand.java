@@ -3,17 +3,17 @@ package robot.subsystems.conveyer.Commands;
 import edu.wpi.first.wpilibj.command.Command;
 import robot.subsystems.conveyer.Constants;
 
-import static robot.Robot.ConveyerShooter;
+import static robot.Robot.conveyor;
 
 /**
  *
  */
-public class shooterConveyer extends Command {
+public class ConveyorCommand extends Command {
 
-    public shooterConveyer() {
+    public ConveyorCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        requires(ConveyerShooter);
+        requires(conveyor);
     }
 
     // Called just before this Command runs the first time
@@ -22,7 +22,8 @@ public class shooterConveyer extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        ConveyerShooter.setSpeed(Constants.shooterSpeed);
+        conveyor.SetSpeedForRotation(Constants.TRISERION_SPEED);
+        conveyor.setSpeed(Constants.SHOOTER_SPEED);
     }
 
     // Make this return true when this Command no longer needs to run execute()

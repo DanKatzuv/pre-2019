@@ -7,7 +7,6 @@
 
 package robot.subsystems.conveyer;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -30,7 +29,5 @@ public class ConveyerShooter extends Subsystem {
 
     }
 
-    public void setSpeed(double speed) {
-        ConveyerForShooter.set(ControlMode.PercentOutput, speed);
-    }
+
 }
