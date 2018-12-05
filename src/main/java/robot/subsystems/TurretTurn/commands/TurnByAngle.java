@@ -33,10 +33,17 @@ public class TurnByAngle extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        startAngle = TurretTurn.getAngle();
+        if (this.isRelative){
+            this.desiredAngle += startAngle;
+        }
+        this.arcLength = (Constants.SHOOTER_BASE_PERIMITER * Math.PI)*((desiredAngle - startAngle)/360);
+
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+
     }
 
     // Make this return true when this Command no longer needs to run execute()
