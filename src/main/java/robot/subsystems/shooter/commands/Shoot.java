@@ -10,10 +10,11 @@ import robot.Robot;
 public class Shoot extends Command {
     private double velocity;
     private double timeout;
-    Timer timer = new Timer();
+    private Timer timer = new Timer();
     public Shoot(double velocity, double timeout) {
         requires(Robot.shooter);
         this.velocity = velocity;
+        this.timeout = timeout;
     }
 
     // Called just before this Command runs the first time
@@ -41,5 +42,6 @@ public class Shoot extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+        end();
     }
 }
