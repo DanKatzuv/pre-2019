@@ -17,7 +17,16 @@ public class TurnByAngle extends Command {
     private boolean isRelative;
     private TurretTurn turretTurn = Robot.turretTurn;
 
-    public TurnByAngle() {
+    /**
+     *
+     * @param desiredAngle the angle you want to turn in
+     * @param isRelative true if you want to turn desiredAngle, or false if you want to turn to the desiredAngle
+     * @author Lior
+     */
+    public TurnByAngle(double desiredAngle, boolean isRelative) {
+        this.isRelative = isRelative;
+        this.desiredAngle = desiredAngle;
+        requires(turretTurn);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
