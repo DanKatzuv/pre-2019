@@ -1,5 +1,6 @@
 package robot.subsystems.shooter.commands;
 
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import robot.Robot;
@@ -22,6 +23,15 @@ public class Shoot extends Command {
         requires(Robot.shooter);
         this.velocity = velocity;
         this.timeout = timeout;
+    }
+
+    /**
+     * Constructor of the Shoot command.
+     *
+     * @param NTvelocity Inputs the velocity from a networkTableEntry (in m/s).
+     */
+    public Shoot(NetworkTableEntry NTvelocity) {
+        this(NTvelocity.getDouble(0), 0.0);
     }
 
     // Called just before this Command runs the first time
