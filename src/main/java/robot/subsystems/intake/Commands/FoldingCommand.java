@@ -5,7 +5,7 @@ import robot.subsystems.intake.Constants;
 
 import static robot.Robot.intake;
 
-/**@author orel
+/**@author Orel
  *
  */
 public class FoldingCommand extends Command {
@@ -25,6 +25,7 @@ public class FoldingCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        //the speed in proportional calculations
         speed = ((Constants.INTAKE_ARC / 4) - intake.getEncoderDist()) * Constants.kP;
         intake.setFoldingSpeed(speed);
     }
