@@ -13,4 +13,8 @@ public class Ports {
     final static int leftEncoderChannelA = -2;
     final static int leftEncoderChannelB = -2;
 
+    static final int leftGearShifterForwardChannel = 0;
+    static final int leftGearShifterReverseChannel = 0;
+    static final int rightGearShifterForwardChannel = 0;
+    static final int rightGearShifterReverseChannel = 0;
 }

@@ -30,6 +30,10 @@ public class Drivetrain extends Subsystem {
 
     private final Encoder leftEncoder = new Encoder(Ports.leftEncoderChannelA, Ports.leftEncoderChannelB);
     private final Encoder rightEncoder = new Encoder(Ports.rightEncoderChannelA, Ports.rightEncoderChannelB);
+
+    private final DoubleSolenoid leftGearShifter = new DoubleSolenoid(Ports.leftGearShifterReverseChannel, Ports.leftGearShifterForwardChannel);
+    private final DoubleSolenoid rightGearShifter = new DoubleSolenoid(Ports.rightGearShifterReverseChannel, Ports.rightGearShifterForwardChannel);
+
     public Point currentLocation;
 
     public Drivetrain() {
@@ -107,6 +111,25 @@ public class Drivetrain extends Subsystem {
     public void resetEncoders() {
         leftEncoder.reset();
         rightEncoder.reset();
+    }
+
+    /**
+     * Change the gear of the Drivetrain.
+     *
+     * @param value value to change
+     */
+    public void changeGear(DoubleSolenoid.Value value) {
+        leftGearShifter.set(value);
+        rightGearShifter.set(value);
+    }
+
+    /**
+     * Return the current gear of the Drivetrain.
+     *
+     * @return current gear of the Drivetrain
+     */
+    public DoubleSolenoid.Value getGear() {
+        return leftGearShifter.get();
     }
 
     /**
