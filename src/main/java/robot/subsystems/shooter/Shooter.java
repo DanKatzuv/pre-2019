@@ -16,13 +16,14 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *
+ * @author paulo
  */
 public class Shooter extends Subsystem {
     private final VictorSPX victorMotor = new VictorSPX(Ports.victorMotor);
     private final TalonSRX talonMotor = new TalonSRX(Ports.talonMotor);
     private final Encoder encoder = new Encoder(Ports.encoderChannelA, Ports.encoderChannelB);
-    public Shooter(){
+
+    public Shooter() {
         encoder.setDistancePerPulse(Constants.DISTANCE_PER_PULSE);
 
         //what the motor does when not given voltage (Brake - decelerate the motor, Coast - not stop the motor)
@@ -45,6 +46,7 @@ public class Shooter extends Subsystem {
 
         victorMotor.follow(talonMotor);
     }
+
     @Override
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -53,35 +55,39 @@ public class Shooter extends Subsystem {
 
     /**
      * Set the fly wheel speed to a number between -1 and 1.
+     *
      * @param speed number from -1 to 1
      */
-    public void setMotorSpeed(double speed){
+    public void setMotorSpeed(double speed) {
         talonMotor.set(ControlMode.PercentOutput, speed);
 
     }
 
     /**
      * set the motor rotations per minute
+     *
      * @param rpm rotations of the wheel per minute
      */
-    public void setMotorRPM(double rpm){
+    public void setMotorRPM(double rpm) {
         talonMotor.set(ControlMode.Velocity, 1440 * rpm / 600); //TODO: make sure the calculations are correct
     }
 
     /**
      * set the velocity of the wheel speed
+     *
      * @param velocity wheel tangent speed in m/s
      */
-    public void setMotorVelocity(double velocity){
+    public void setMotorVelocity(double velocity) {
         //Convert velocity to rotations per minute.
         setMotorRPM(velocity * 2 * Math.PI * Constants.WHEEL_RADIUS * 60);
     }
 
     /**
      * Returns the encoder rate
+     *
      * @return velocity of the wheel based on the encoder.
      */
-    public double getVelocity(){
+    public double getVelocity() {
         return encoder.getRate();
     }
 
