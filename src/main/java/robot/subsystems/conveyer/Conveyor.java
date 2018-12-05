@@ -7,8 +7,7 @@
 
 package robot.subsystems.conveyer;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import robot.subsystems.conveyer.Commands.ConveyorCommand;
 
@@ -18,8 +17,8 @@ import robot.subsystems.conveyer.Commands.ConveyorCommand;
 public class Conveyor extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-    private final VictorSPX conveyorRotation = new VictorSPX(Ports.ConRotation);
-    private final VictorSPX conveyorForShooter = new VictorSPX(Ports.ConToSHOOTER);
+    private final VictorSP conveyorRotation = new VictorSP(Ports.ConRotation);
+    private final VictorSP conveyorForShooter = new VictorSP(Ports.ConToSHOOTER);
 
 
     public Conveyor() {
@@ -40,11 +39,11 @@ public class Conveyor extends Subsystem {
      * @param speed the speed for the motor
      */
     public void SetSpeedForRotation(double speed){
-        conveyorRotation.set(ControlMode.PercentOutput, speed);
+        conveyorRotation.set(speed);
     }
 
     public void setSpeed(double speed) {
-        conveyorForShooter.set(ControlMode.PercentOutput, speed);
+        conveyorForShooter.set(speed);
     }
 
 
