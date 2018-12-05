@@ -29,6 +29,8 @@ public class Intake extends Subsystem {
         leftIntake.setInverted(Constants.LEFT_INVERTED);
         rightIntake.setInverted(Constants.RIGHT_INVERTED);
         folding.setInverted(Constants.FOLDING_INVERTED);
+        proximitySensor.resetAccumulator();
+        foldingEncoder.reset();
     }
 
     @Override
@@ -77,5 +79,20 @@ public class Intake extends Subsystem {
         rightIntake.set(0);
         leftIntake.set(0);
     }
+
+    //INTAKE POSITION DEGREE
+    public boolean intakeIN90DEG() {
+        return (Constants.INTAKE_ARC / 4) >= getEncoderDist();
+    }
+
+    //ENCODER DISTANCE
+    public int getEncoderDist() {
+        return foldingEncoder.get();
+    }
+
+    public double currentIntakeDegree() {
+        return getEncoderDist() / Constants.INTAKE_ARC;
+    }
+
 
 }
