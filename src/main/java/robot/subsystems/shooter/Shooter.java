@@ -47,4 +47,30 @@ public class Shooter extends Subsystem {
         // Set the default command for a subsystem here.
         // setDefaultCommand(new MySpecialCommand());
     }
+
+    /**
+     * Set the fly wheel speed to a number between -1 and 1.
+     * @param speed number from -1 to 1
+     */
+    public void setMotorSpeed(double speed){
+        talonMotor.set(ControlMode.PercentOutput, speed);
+
+    }
+
+    /**
+     * set the motor rotations per minute
+     * @param rpm rotations of the wheel per minute
+     */
+    public void setMotorRPM(double rpm){
+        talonMotor.set(ControlMode.Velocity, 1440 * rpm / 600); //TODO: make sure the calculations are correct
+    }
+
+    /**
+     * set the velocity of the wheel speed
+     * @param velocity wheel tangent speed in m/s
+     */
+    public void setMotorVelocity(double velocity){
+        //convert the velocity to rps/10        m/s  *  2 *   PI    *           r     *  units/rotation / millisecond/second
+        talonMotor.set(ControlMode.Velocity, velocity * 2 * Math.PI * Constants.WHEEL_RADIUS * 1440 / 10);
+    }
 }
