@@ -43,7 +43,9 @@ public class Intake extends Subsystem {
         leftIntake.set(speed);
     }
 
-    //set functions for each motor
+    /**
+     * @param speed the speed of the motors
+     */
     public void setRightSpeed(double speed) {
         rightIntake.set(speed);
     }
@@ -52,30 +54,50 @@ public class Intake extends Subsystem {
         folding.set(speed);
     }
 
-    //Get data from proximity sensor
+    /**
+     *
+     * @return the voltage from the proximity sensor
+     */
     private double voltage() {
         return proximitySensor.getVoltage();
     }
 
-    //Method to know if the cube inside
+    /**
+     *
+     * @return if the cube inside
+     */
     public boolean isCubeInside() {
         return voltage() <= Constants.MIN_PROXIMITY;
     }
 
+    /**
+     * method that stop the motors
+     */
     public void stopAllMotors() {
         rightIntake.set(0);
         leftIntake.set(0);
         folding.set(0);
     }
 
+    /**
+     *
+     * @return the distance the encoder moved
+     */
     public int getEncoderDist() {
         return foldingEncoder.get();
     }
 
+    /**
+     *
+     * @return the current angle of the intake
+     */
     public double currentIntakeDegree() {
         return getEncoderDist() / Constants.INTAKE_AXIS_CIRCUMFERENCE;
     }
 
+    /**
+     * reset the sensors
+     */
     public void reset() {
         foldingEncoder.reset();
         proximitySensor.resetAccumulator();
