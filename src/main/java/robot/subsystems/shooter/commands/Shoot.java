@@ -5,12 +5,19 @@ import edu.wpi.first.wpilibj.command.Command;
 import robot.Robot;
 
 /**
- *
+ * An implementation of the wpilib Command. sets the shooter wheel velocity to a given rate (in m/s)
+ * can also be set to run for a certain amount of time, in the end of which the wheel turns off.
  */
 public class Shoot extends Command {
     private double velocity;
     private double timeout;
     private Timer timer = new Timer();
+
+    /**
+     * Constructor of the Shoot command.
+     * @param velocity tangent speed of the wheel in meters/seconds.
+     * @param timeout timeout of the wheels to spin in seconds. If set to 0 the wheels will not stop.
+     */
     public Shoot(double velocity, double timeout) {
         requires(Robot.shooter);
         this.velocity = velocity;
