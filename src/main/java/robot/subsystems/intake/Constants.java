@@ -3,7 +3,7 @@ package robot.subsystems.intake;
 public class Constants {
     public final static double kP = 0;
     public final static int FOLDING_TIMEOUT = 2;
-    public final static int balls_timeout = 3;
+    public final static int WAIT_BALLS_TIMEOUT = 3;
     final static boolean RIGHT_INVERTED = false;
     final static boolean LEFT_INVERTED = false;
     final static boolean FOLDING_INVERTED = false;
