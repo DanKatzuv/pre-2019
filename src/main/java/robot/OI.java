@@ -8,6 +8,9 @@
 package robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import robot.subsystems.drivetrain.commands.SwitchGear;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -45,4 +48,18 @@ public class OI {
     // Start the command when the button is released and let it run the command
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
+
+    OI() {
+        //// CREATING BUTTONS
+        // One type of button is a joystick button which is any button on a
+        //// joystick.
+        // You create one by telling it which joystick it's on and which button
+        // number it is.
+        // Joystick stick = new Joystick(port);
+        // Button button = new JoystickButton(stick, buttonNumber);
+        Button leftButton1 = new JoystickButton(leftStick, 1);
+        leftButton1.whenPressed(new SwitchGear());
+        Button rightButton1 = new JoystickButton(rightStick, 1);
+        rightButton1.whenPressed(new SwitchGear());
+    }
 }
