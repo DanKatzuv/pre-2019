@@ -1,41 +1,38 @@
-package robot.subsystems.intake.commands;
+package robot.subsystems.conveyer.Commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import robot.Robot;
-import robot.subsystems.intake.Intake;
+import robot.subsystems.conveyer.Conveyer;
 
-public class taking extends Command {
-    public taking() {
-        requires(Robot.Intake);
+/**
+ *
+ */
+public class TriserionCommand extends Command {
+
+    public TriserionCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+        requires(new Conveyer());
     }
 
     // Called just before this Command runs the first time
-    @Override
     protected void initialize() {
-
     }
 
     // Called repeatedly when this Command is scheduled to run
-    @Override
-    protected void execute() {}
+    protected void execute() {
+    }
 
-    @Override
+    // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return false;
     }
 
     // Called once after isFinished returns true
-    @Override
     protected void end() {
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
-    @Override
     protected void interrupted() {
     }
-}
-
 }
