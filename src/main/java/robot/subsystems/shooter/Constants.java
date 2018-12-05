@@ -4,6 +4,7 @@ class Constants {
     static final boolean TALON_INVERTED = false;
     static final boolean VICTOR_INVERTED = false;
 
+    static final double DISTANCE_PER_PULSE = 0;
     static final double WHEEL_RADIUS = 0;
 
     static final double kP = 0, kI = 0, kD = 0, kF = 0;

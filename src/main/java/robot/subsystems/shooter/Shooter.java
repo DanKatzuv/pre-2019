@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -20,8 +21,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Shooter extends Subsystem {
     private final VictorSPX victorMotor = new VictorSPX(Ports.victorMotor);
     private final TalonSRX talonMotor = new TalonSRX(Ports.talonMotor);
-
+    private final Encoder encoder = new Encoder(Ports.encoderChannelA, Ports.encoderChannelB);
     public Shooter(){
+        encoder.setDistancePerPulse(Constants.DISTANCE_PER_PULSE);
+
         //what the motor does when not given voltage (Brake - decelerate the motor, Coast - not stop the motor)
         victorMotor.setNeutralMode(NeutralMode.Coast);
         talonMotor.setNeutralMode(NeutralMode.Coast);
@@ -73,4 +76,13 @@ public class Shooter extends Subsystem {
         //convert the velocity to rps/10        m/s  *  2 *   PI    *           r     *  units/rotation / millisecond/second
         talonMotor.set(ControlMode.Velocity, velocity * 2 * Math.PI * Constants.WHEEL_RADIUS * 1440 / 10);
     }
+
+    /**
+     * Returns the encoder rate
+     * @return velocity of the wheel based on the encoder.
+     */
+    public double getVelocity(){
+        return encoder.getRate();
+    }
+
 }
