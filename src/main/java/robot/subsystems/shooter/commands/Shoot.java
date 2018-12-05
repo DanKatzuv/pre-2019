@@ -21,7 +21,7 @@ public class Shoot extends Command {
     protected void initialize() {
         timer.reset();
         timer.start();
-        Robot.shooter.setMotorVelocity(velocity);
+        Robot.shooter.setMotorVelocity(velocity); //TODO: check if this line has to be in the execute.
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -30,7 +30,7 @@ public class Shoot extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return timeout == 0 || timer.get() > timeout;
+        return timeout == 0 || timer.get() >= timeout;
     }
 
     // Called once after isFinished returns true
@@ -43,5 +43,6 @@ public class Shoot extends Command {
     // subsystems is scheduled to run
     protected void interrupted() {
         end();
+        this.cancel();
     }
 }
