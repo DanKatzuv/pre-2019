@@ -7,9 +7,9 @@
 
 package robot.subsystems.drivetrain;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import robot.Robot;
 import robot.subsystems.drivetrain.commands.JoystickDrive;
@@ -21,10 +21,13 @@ import robot.subsystems.drivetrain.pure_pursuit.Point;
 
 
 public class Drivetrain extends Subsystem {
-    private final VictorSPX leftForward = new VictorSPX(Ports.leftForwardMotor);
-    private final VictorSPX leftBack = new VictorSPX(Ports.leftBackMotor);
-    private final VictorSPX rightForward = new VictorSPX(Ports.rightForwardMotor);
-    private final VictorSPX rightBack = new VictorSPX(Ports.rightBackMotor);
+    private final VictorSP left1 = new VictorSP(Ports.leftMotor1);
+    private final VictorSP left2 = new VictorSP(Ports.leftMotor2);
+    private final VictorSP left3 = new VictorSP(Ports.leftMotor3);
+    private final VictorSP right1 = new VictorSP(Ports.rightMotor1);
+    private final VictorSP right2 = new VictorSP(Ports.rightMotor2);
+    private final VictorSP right3 = new VictorSP(Ports.rightMotor3);
+
     private final Encoder leftEncoder = new Encoder(Ports.leftEncoderChannelA, Ports.leftEncoderChannelB);
     private final Encoder rightEncoder = new Encoder(Ports.rightEncoderChannelA, Ports.rightEncoderChannelB);
     public Point currentLocation;
@@ -32,8 +35,13 @@ public class Drivetrain extends Subsystem {
     public Drivetrain() {
         leftEncoder.setDistancePerPulse(Constants.PULSE_PER_DISTANCE);
         rightEncoder.setDistancePerPulse(Constants.PULSE_PER_DISTANCE);
-        leftForward.setInverted(Constants.LEFT_REVERSED);
-        rightForward.setInverted(Constants.RIGHT_REVERSED);
+
+        left1.setInverted(Constants.LEFT1_REVERSED);
+        left2.setInverted(Constants.LEFT2_REVERSED);
+        left3.setInverted(Constants.LEFT3_REVERSED);
+        right1.setInverted(Constants.RIGHT1_REVERSED);
+        right2.setInverted(Constants.RIGHT2_REVERSED);
+        right3.setInverted(Constants.RIGHT3_REVERSED);
     }
 
     @Override
@@ -62,8 +70,9 @@ public class Drivetrain extends Subsystem {
      * @param speed speed for the motors of the left side
      */
     private void setLeftSpeed(double speed) {
-        leftForward.set(ControlMode.PercentOutput, speed);
-        leftBack.set(ControlMode.PercentOutput, speed);
+        left1.set(speed);
+        left2.set(speed);
+        left3.set(speed);
     }
 
     public double getRightSpeed() {
@@ -76,8 +85,9 @@ public class Drivetrain extends Subsystem {
      * @param speed speed for the motors of the right side
      */
     private void setRightSpeed(double speed) {
-        rightForward.set(ControlMode.PercentOutput, speed);
-        rightBack.set(ControlMode.PercentOutput, speed);
+        right1.set(speed);
+        right2.set(speed);
+        right3.set(speed);
     }
 
     /**
