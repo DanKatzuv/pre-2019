@@ -10,6 +10,9 @@ package robot;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -30,6 +33,7 @@ public class Robot extends TimedRobot {
     public static final Drivetrain drivetrain = new Drivetrain();
     public static final TurretTurn turretTurn = new TurretTurn();
 
+    NetworkTableEntry degreeToTurnEntry;
 
     public static AHRS navx = new AHRS(SPI.Port.kMXP);
 
@@ -49,6 +53,10 @@ public class Robot extends TimedRobot {
         //m_chooser.setDefaultOption("Default Auto", new JoystickDrive());
         // chooser.addOption("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", m_chooser);
+        NetworkTableInstance degreeInstance = NetworkTableInstance.getDefault();
+        NetworkTable table = degreeInstance.getTable("degrees from image detection");
+        degreeToTurnEntry = table.getEntry("degree");
+        
     }
 
     /**
