@@ -95,5 +95,9 @@ public class Intake extends Subsystem {
         return getEncoderDist() / Constants.INTAKE_ARC;
     }
 
+    public void reset() {
+        foldingEncoder.reset();
+        proximitySensor.resetAccumulator();
+    }
 
 }
