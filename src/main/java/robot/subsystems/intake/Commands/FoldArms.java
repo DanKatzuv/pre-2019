@@ -8,16 +8,15 @@ import static robot.Robot.intake;
 /**@author Orel
  *
  */
-public class FoldingCommand extends Command {
+public class FoldArms extends Command {
 
-    private double speed;
-    private int desiredDegree;
+    private final int angle;
 
-    public FoldingCommand(int degree) {
+    public FoldArms(int angle) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         requires(intake);
-        this.desiredDegree = degree;
+        this.angle = angle;
     }
 
     // Called just before this Command runs the first time
@@ -28,19 +27,18 @@ public class FoldingCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         //the speed in proportional calculations
-        speed = ((Constants.INTAKE_ARC / 360) * desiredDegree - intake.getEncoderDist()) * Constants.kP;
+        double speed = ((Constants.INTAKE_AXIS_CIRCUMFERENCE / 360) * angle - intake.getEncoderDist()) * Constants.kP;
         intake.setFoldingSpeed(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-
-        return intake.currentIntakeDegree() <= desiredDegree;
+        return Math.abs(intake.currentIntakeDegree() - angle) < 10;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        intake.endAllMotors();
+        intake.stopAllMotors();
     }
 
     // Called when another command which requires one or more of the same
