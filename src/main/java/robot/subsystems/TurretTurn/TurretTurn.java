@@ -11,21 +11,38 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.interfaces.Potentiometer;
+import robot.subsystems.TurretTurn.commands.TurnByAngle;
 
 /**
  * An example subsystem.  You can replace me with your own Subsystem.
  */
 public class TurretTurn extends Subsystem {
-    private final TalonSRX frontMotor = new TalonSRX(Ports.FrontMotor);
-    private final TalonSRX backMotor = new TalonSRX(Ports.BackMotor);
-    private static final AnalogPotentiometer potentiometer = new AnalogPotentiometer(Ports.Potentiometer, Constants.VOLT_DEGREE_PROPORTION);
+    public final TalonSRX Motor = new TalonSRX(Ports.Motor);
+    private final AnalogPotentiometer potentiometer = new AnalogPotentiometer(Ports.Potentiometer, Constants.VOLT_DEGREE_PROPORTION);
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
     @Override
     public void initDefaultCommand() {
+        setDefaultCommand(new TurnByAngle(0, true));
         // Set the default command for a subsystem here.
         // setDefaultCommand(new MySpecialCommand());
     }
+    /**
+     * the method uses a talon controlMode to set the amount of distance it needs to turn to get to the desired position
+     * @param positionToTurn the distance the motors need to turn, the arc of the degree we want to turn in
+     * @author lior
+     */
+    public void setDesiredAngle(double positionToTurn){
+        Motor.set(ControlMode.MotionMagic, positionToTurn);
+    }
+    /**
+     * the method uses the input scale calculated with the maximum voltage possible and the maximum degreees to calculate the current angle
+     * @author Lior
+     */
+    public double getAngle(){
+        return potentiometer.get();
+    }
+
+
 }
