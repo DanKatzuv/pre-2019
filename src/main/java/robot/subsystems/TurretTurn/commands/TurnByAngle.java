@@ -1,6 +1,5 @@
 package robot.subsystems.TurretTurn.commands;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.command.Command;
 import robot.Robot;
 import robot.subsystems.TurretTurn.Constants;
@@ -18,9 +17,8 @@ public class TurnByAngle extends Command {
     private TurretTurn turretTurn = Robot.turretTurn;
 
     /**
-     *
      * @param desiredAngle the angle you want to turn in
-     * @param isRelative true if you want to turn desiredAngle, or false if you want to turn to the desiredAngle
+     * @param isRelative   true if you want to turn desiredAngle, or false if you want to turn to the desiredAngle
      * @author Lior
      */
     public TurnByAngle(double desiredAngle, boolean isRelative) {
@@ -33,17 +31,23 @@ public class TurnByAngle extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        startAngle = TurretTurn.getAngle();
-        if (this.isRelative){
-            this.desiredAngle += startAngle;
-        }
-        this.arcLength = (Constants.SHOOTER_BASE_PERIMITER * Math.PI)*((desiredAngle - startAngle)/360);
 
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-
+        startAngle = Robot.turretTurn.getAngle();
+        if (this.isRelative) {
+            if (startAngle + this.desiredAngle >= Constants.MAX_DEGREE ||
+                    startAngle + this.desiredAngle <= Constants.MIN_DEGREE)
+                this.desiredAngle += startAngle - 360;
+            this.desiredAngle += startAngle;
+        }
+        if (desiredAngle - startAngle <= 180)
+            this.arcLength = (Constants.SHOOTER_BASE_PERIMITER * Math.PI) * ((desiredAngle - startAngle) / 360);
+        else
+            this.arcLength = (Constants.SHOOTER_BASE_PERIMITER * Math.PI) * ((desiredAngle - startAngle - 360) / 360);
+        Robot.turretTurn.setDesiredAngle(this.arcLength);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -53,6 +57,7 @@ public class TurnByAngle extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+
     }
 
     // Called when another command which requires one or more of the same
