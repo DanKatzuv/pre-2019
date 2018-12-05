@@ -73,8 +73,8 @@ public class Shooter extends Subsystem {
      * @param velocity wheel tangent speed in m/s
      */
     public void setMotorVelocity(double velocity){
-        //convert the velocity to rps/10        m/s  *  2 *   PI    *           r     *  units/rotation / millisecond/second
-        talonMotor.set(ControlMode.Velocity, velocity * 2 * Math.PI * Constants.WHEEL_RADIUS * 1440 / 10);
+        //Convert velocity to rotations per minute.
+        setMotorRPM(velocity * 2 * Math.PI * Constants.WHEEL_RADIUS * 60);
     }
 
     /**
