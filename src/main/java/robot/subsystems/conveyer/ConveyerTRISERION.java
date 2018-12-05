@@ -15,14 +15,12 @@ import robot.subsystems.conveyer.Commands.TriserionCommand;
 /**
  * An example subsystem.  You can replace me with your own Subsystem.
  */
-public class Conveyer extends Subsystem {
+public class ConveyerTRISERION extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     private final VictorSPX ConveyerRotation = new VictorSPX(Ports.ConRotation);
-    private final VictorSPX ConveyerForShooter = new VictorSPX(Ports.ConToSHOOTER);
 
-    public Conveyer(){
-        ConveyerForShooter.setInverted(false);
+    public ConveyerTRISERION(){
         ConveyerRotation.setInverted(false);
     }
 
@@ -41,9 +39,6 @@ public class Conveyer extends Subsystem {
         ConveyerRotation.set(ControlMode.PercentOutput,speed);
     }
 
-    public  void  setSpeedConveyerForShooter(double speed){
-        ConveyerForShooter.set(ControlMode.PercentOutput,speed);
 
-    }
 
 }

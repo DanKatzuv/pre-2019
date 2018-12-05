@@ -8,13 +8,15 @@
 package robot;
 
 import com.kauailabs.navx.frc.AHRS;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import robot.subsystems.conveyer.Conveyer;
+import robot.subsystems.conveyer.ConveyerShooter;
+import robot.subsystems.conveyer.ConveyerTRISERION;
 import robot.subsystems.drivetrain.Drivetrain;
 
 /**
@@ -26,7 +28,8 @@ import robot.subsystems.drivetrain.Drivetrain;
  */
 public class Robot extends TimedRobot {
     public static final Drivetrain drivetrain = new Drivetrain();
-    public static final Conveyer conveyer = new Conveyer();
+    public static final ConveyerTRISERION CONVEYER_TRISERION = new ConveyerTRISERION();
+    public static final ConveyerShooter ConveyerShooter = new ConveyerShooter();
     public static AHRS navx = new AHRS(SPI.Port.kMXP);
 
 
