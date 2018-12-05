@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.subsystems.drivetrain.Drivetrain;
+import robot.subsystems.intake.Intake;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -25,7 +26,7 @@ import robot.subsystems.drivetrain.Drivetrain;
  */
 public class Robot extends TimedRobot {
     public static final Drivetrain drivetrain = new Drivetrain();
-    public static final Intake Intake = new Intake();
+    public static final Intake intake = new Intake();
     public static AHRS navx = new AHRS(SPI.Port.kMXP);
 
 
