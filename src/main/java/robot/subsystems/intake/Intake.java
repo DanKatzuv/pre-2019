@@ -7,6 +7,7 @@
 
 package robot.subsystems.intake;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -18,6 +19,7 @@ public class Intake extends Subsystem {
     // here. Call these from Commands.
     private final VictorSP LeftIntake = new VictorSP(Ports.LeftIntake);
     private final VictorSP RightIntake = new VictorSP(Ports.RightIntake);
+    private final AnalogInput proximitySensor = new AnalogInput(Ports.proximity);
     private final VictorSP Folding = new VictorSP(Ports.Folding);
 
 
@@ -57,6 +59,21 @@ public class Intake extends Subsystem {
 
     public void setFoldingSpeed(double speed) {
         Folding.set(speed);
+    }
+
+    //Get data from proximity sensor
+    public double voltage() {
+        return proximitySensor.getVoltage();
+    }
+
+    //Method to know if the cube inside
+    public boolean CubeInside() {
+        return voltage() <= Constants.MIN_PROXIMITY;
+    }
+
+    public void endAllMotors() {
+        RightIntake.set(0);
+        LeftIntake.set(0);
     }
 
 }
