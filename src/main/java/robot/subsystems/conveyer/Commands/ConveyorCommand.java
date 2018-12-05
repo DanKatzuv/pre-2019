@@ -22,8 +22,8 @@ public class ConveyorCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        conveyor.SetSpeedForRotation(Constants.TRISERION_SPEED);
-        conveyor.setSpeed(Constants.SHOOTER_SPEED);
+        conveyor.setSorterSpeed(Constants.SORTER_SPEED);
+        conveyor.setShooterWheelSpeed(Constants.SHOOTER_WHEEL_SPEED);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -33,6 +33,8 @@ public class ConveyorCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+        conveyor.setSorterSpeed(0); //TODO: Check if can be deleted if default value is 0
+        conveyor.setShooterWheelSpeed(0);
     }
 
     // Called when another command which requires one or more of the same
