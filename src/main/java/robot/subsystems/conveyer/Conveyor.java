@@ -12,19 +12,18 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import robot.subsystems.conveyer.Commands.ConveyorCommand;
 
 /**
- * An example subsystem.  You can replace me with your own Subsystem.
+ * The Conveyor subsystem which feeds balls to the Shooter.
  */
 public class Conveyor extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-    private final VictorSP conveyorRotation = new VictorSP(Ports.ConRotation);
-    private final VictorSP conveyorForShooter = new VictorSP(Ports.ConToSHOOTER);
+    private final VictorSP sorter = new VictorSP(Ports.sorter);
+    private final VictorSP shooterWheel = new VictorSP(Ports.shooterWheel);
 
 
     public Conveyor() {
-        conveyorRotation.setInverted(false);
-
-        conveyorForShooter.setInverted(false);
+        sorter.setInverted(Constants.SORTER_INVERTED);
+        shooterWheel.setInverted(Constants.SHOOTER_ROTATED);
     }
 
     @Override
@@ -35,15 +34,17 @@ public class Conveyor extends Subsystem {
     }
 
     /**
-     * @auther orel
      * @param speed the speed for the motor
      */
-    public void SetSpeedForRotation(double speed){
-        conveyorRotation.set(speed);
+    public void setSorterSpeed(double speed) {
+        sorter.set(speed);
     }
 
-    public void setSpeed(double speed) {
-        conveyorForShooter.set(speed);
+    /**
+     * @param speed the speed for the motor
+     */
+    public void setShooterWheelSpeed(double speed) {
+        shooterWheel.set(speed);
     }
 
 
