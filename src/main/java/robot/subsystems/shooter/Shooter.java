@@ -9,6 +9,7 @@ package robot.subsystems.shooter;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -21,7 +22,12 @@ public class Shooter extends Subsystem {
     private final TalonSRX talonMotor = new TalonSRX(Ports.talonMotor);
 
     public Shooter(){
-        talonMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, Constants.kPIDLoopIdx, 0); //Turns the units of the talon to correspond to 1440 encoder units.
+        //what the motor does when not given voltage (Brake - decelerate the motor, Coast - not stop the motor)
+        victorMotor.setNeutralMode(NeutralMode.Coast);
+        talonMotor.setNeutralMode(NeutralMode.Coast);
+
+        //Turns the units of the talon to correspond to 1440 encoder units.
+        talonMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, Constants.kPIDLoopIdx, 0);
 
         talonMotor.configNominalOutputForward(0, Constants.kTimeoutMs); //nominal motor speed
         talonMotor.configNominalOutputReverse(0, Constants.kTimeoutMs);
@@ -33,6 +39,8 @@ public class Shooter extends Subsystem {
         talonMotor.config_kI(Constants.kPIDLoopIdx, Constants.kI, Constants.kTimeoutMs);
         talonMotor.config_kD(Constants.kPIDLoopIdx, Constants.kD, Constants.kTimeoutMs);
         talonMotor.config_kF(Constants.kPIDLoopIdx, Constants.kF, Constants.kTimeoutMs);
+
+        victorMotor.follow(talonMotor);
     }
     @Override
     public void initDefaultCommand() {
