@@ -7,11 +7,11 @@ import static robot.Robot.intake;
 /**@author Orel
  *
  */
-public class CubeTakeCommand extends Command {
+public class IntakeCube extends Command {
 
-    private double speed;
+    private final double speed;
 
-    public CubeTakeCommand(double speed) {
+    public IntakeCube(double speed) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         requires(intake);
@@ -31,13 +31,13 @@ public class CubeTakeCommand extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
 
-        return intake.CubeInside();
+        return intake.isCubeInside();
 
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        intake.endAllMotors();
+        intake.stopAllMotors();
     }
 
     // Called when another command which requires one or more of the same

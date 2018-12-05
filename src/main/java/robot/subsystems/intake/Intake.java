@@ -39,17 +39,8 @@ public class Intake extends Subsystem {
         // setDefaultCommand(new MySpecialCommand());
     }
 
-    // functions for the speed of each motor
-    public double getLeftSpeed() {
-        return leftIntake.getSpeed();
-    }
-
     public void setLeftSpeed(double speed) {
         leftIntake.set(speed);
-    }
-
-    public double getRightSpeed() {
-        return rightIntake.getSpeed();
     }
 
     //set functions for each motor
@@ -57,42 +48,32 @@ public class Intake extends Subsystem {
         rightIntake.set(speed);
     }
 
-    public double getFoldingSpeed() {
-        return folding.getSpeed();
-    }
-
     public void setFoldingSpeed(double speed) {
         folding.set(speed);
     }
 
     //Get data from proximity sensor
-    public double voltage() {
+    private double voltage() {
         return proximitySensor.getVoltage();
     }
 
     //Method to know if the cube inside
-    public boolean CubeInside() {
+    public boolean isCubeInside() {
         return voltage() <= Constants.MIN_PROXIMITY;
     }
 
-    public void endAllMotors() {
+    public void stopAllMotors() {
         rightIntake.set(0);
         leftIntake.set(0);
         folding.set(0);
     }
 
-    //INTAKE POSITION DEGREE
-    public boolean intakeIN90DEG() {
-        return (Constants.INTAKE_ARC / 4) >= getEncoderDist();
-    }
-
-    //ENCODER DISTANCE
     public int getEncoderDist() {
         return foldingEncoder.get();
     }
 
     public double currentIntakeDegree() {
-        return getEncoderDist() / Constants.INTAKE_ARC;
+        return getEncoderDist() / Constants.INTAKE_AXIS_CIRCUMFERENCE;
     }
 
     public void reset() {
