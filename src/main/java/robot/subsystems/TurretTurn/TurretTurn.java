@@ -7,12 +7,19 @@
 
 package robot.subsystems.TurretTurn;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 
 /**
  * An example subsystem.  You can replace me with your own Subsystem.
  */
 public class TurretTurn extends Subsystem {
+    private final TalonSRX frontMotor = new TalonSRX(Ports.FrontMotor);
+    private final TalonSRX backMotor = new TalonSRX(Ports.BackMotor);
+    private static final AnalogPotentiometer potentiometer = new AnalogPotentiometer(Ports.Potentiometer, Constants.VOLT_DEGREE_PROPORTION);
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
