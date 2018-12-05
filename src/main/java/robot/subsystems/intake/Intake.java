@@ -8,6 +8,7 @@
 package robot.subsystems.intake;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -17,16 +18,17 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Intake extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-    private final VictorSP LeftIntake = new VictorSP(Ports.LeftIntake);
-    private final VictorSP RightIntake = new VictorSP(Ports.RightIntake);
+    private final VictorSP leftIntake = new VictorSP(Ports.LeftIntake);
+    private final VictorSP rightIntake = new VictorSP(Ports.RightIntake);
     private final AnalogInput proximitySensor = new AnalogInput(Ports.proximity);
-    private final VictorSP Folding = new VictorSP(Ports.Folding);
+    private final VictorSP folding = new VictorSP(Ports.Folding);
+    private final Encoder foldingEncoder = new Encoder(Ports.FoldingEncoderA, Ports.FoldongEncoderB);
 
 
     public Intake(){
-        LeftIntake.setInverted(Constants.LEFT_INVERTED);
-        RightIntake.setInverted(Constants.RIGHT_INVERTED);
-        Folding.setInverted(Constants.FOLDING_INVERTED);
+        leftIntake.setInverted(Constants.LEFT_INVERTED);
+        rightIntake.setInverted(Constants.RIGHT_INVERTED);
+        folding.setInverted(Constants.FOLDING_INVERTED);
     }
 
     @Override
@@ -37,28 +39,28 @@ public class Intake extends Subsystem {
 
     // functions for the speed of each motor
     public double getLeftSpeed() {
-        return LeftIntake.getSpeed();
+        return leftIntake.getSpeed();
     }
 
     public void setLeftSpeed(double speed) {
-        LeftIntake.set(speed);
+        leftIntake.set(speed);
     }
 
     public double getRightSpeed() {
-        return RightIntake.getSpeed();
+        return rightIntake.getSpeed();
     }
 
     //set functions for each motor
     public void setRightSpeed(double speed) {
-        RightIntake.set(speed);
+        rightIntake.set(speed);
     }
 
     public double getFoldingSpeed() {
-        return Folding.getSpeed();
+        return folding.getSpeed();
     }
 
     public void setFoldingSpeed(double speed) {
-        Folding.set(speed);
+        folding.set(speed);
     }
 
     //Get data from proximity sensor
@@ -72,8 +74,8 @@ public class Intake extends Subsystem {
     }
 
     public void endAllMotors() {
-        RightIntake.set(0);
-        LeftIntake.set(0);
+        rightIntake.set(0);
+        leftIntake.set(0);
     }
 
 }

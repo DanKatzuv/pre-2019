@@ -7,9 +7,9 @@ import static robot.Robot.intake;
 /**
  *
  */
-public class Folding extends Command {
+public class FoldingCommand extends Command {
 
-    public Folding() {
+    public FoldingCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         requires(intake);
