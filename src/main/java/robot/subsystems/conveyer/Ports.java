@@ -1,6 +1,8 @@
 package robot.subsystems.conveyer;
 
 class Ports {
-    final static int sorter = 0;
+    /****PWM**/
+    final static int sorter = 6;
+    /***DIO NAVX***/
     final static int shooterWheel = 0;
 }
