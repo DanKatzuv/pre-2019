@@ -1,6 +1,6 @@
 package robot.subsystems.TurretTurn;
 
 public class Ports {
-    public final static int Motor = 0;
-    final static int Potentiometer = 0;
+    public final static int Motor = 3;
+    final static int Potentiometer = 1;
 }
