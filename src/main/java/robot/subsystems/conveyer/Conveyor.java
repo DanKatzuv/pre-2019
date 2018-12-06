@@ -34,14 +34,18 @@ public class Conveyor extends Subsystem {
     }
 
     /**
-     * @param speed the speed for the motor
+     * This method sets the speed for the sorter motor, input voltage -1 <= speed <= 1
+     * @param speed the speed for the sorter motor
+     * @author orel
      */
     public void setSorterSpeed(double speed) {
         sorter.set(speed);
     }
 
     /**
-     * @param speed the speed for the motor
+     * This method sets the speed for the shooterWheel motor, input voltage -1 <= speed <= 1
+     * @param speed the speed for the shooter wheel motor
+     * @author orel
      */
     public void setShooterWheelSpeed(double speed) {
         shooterWheel.set(speed);
