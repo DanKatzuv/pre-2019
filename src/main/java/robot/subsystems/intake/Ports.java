@@ -1,10 +1,12 @@
 package robot.subsystems.intake;
 
 public class Ports {
-    public final static int LeftIntake=0;
-    public  final static int RightIntake=0;
-    public final static int Folding =0;
+    /***PWM***/
+    public final static int LeftIntake = 10;
+    public final static int RightIntake = 11;
+    public final static int Folding = 9;
+    /****ANALOG-INPUT***/
     public final static int proximity = 0;
-    public final static int FoldingEncoderA = 0;
-    public final static int FoldongEncoderB = 0;
+    public final static int FOLDING_POTENTIOMETER = 0;
+
 }
