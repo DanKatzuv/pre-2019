@@ -27,13 +27,13 @@ public class FoldArms extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         //the speed in proportional calculations
-        double speed = ((Constants.INTAKE_AXIS_CIRCUMFERENCE / 360) * angle - intake.getEncoderDist()) * Constants.kP;
+        double speed = ((Constants.INTAKE_AXIS_CIRCUMFERENCE / 360) * angle - intake.getPotentiometerAngle()) * Constants.kP;
         intake.setFoldingSpeed(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Math.abs(intake.currentIntakeDegree() - angle) < 10;
+        return Math.abs(intake.getPotentiometerAngle() - angle) < 10;
     }
 
     // Called once after isFinished returns true

@@ -9,7 +9,6 @@ package robot.subsystems.intake;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
-import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -23,27 +22,7 @@ public class Intake extends Subsystem {
     private final VictorSP rightIntake = new VictorSP(Ports.RightIntake);
     private final AnalogInput proximitySensor = new AnalogInput(Ports.proximity);
     private final VictorSP folding = new VictorSP(Ports.Folding);
-    private final AnalogPotentiometer foldingEncoder = new AnalogPotentiometer(Ports.FOLDING_POTENTIOMETER) {
-        @Override
-        public double get() {
-            return 0;
-        }
-
-        @Override
-        public PIDSourceType getPIDSourceType() {
-            return null;
-        }
-
-        @Override
-        public void setPIDSourceType(PIDSourceType pidSource) {
-
-        }
-
-        @Override
-        public double pidGet() {
-            return 0;
-        }
-    };
+    private final AnalogPotentiometer foldingEncoder = new AnalogPotentiometer(Ports.FOLDING_POTENTIOMETER);
 
 
     public Intake(){
@@ -101,19 +80,12 @@ public class Intake extends Subsystem {
 
     /**
      *
-     * @return the distance the encoder moved
+     * @return the current angle of the intake
      */
-    public double getEncoderDist() {
+    public double getPotentiometerAngle() {
         return foldingEncoder.get();
     }
 
-    /**
-     *
-     * @return the current angle of the intake
-     */
-    public double currentIntakeDegree() {
-        return getEncoderDist() / Constants.INTAKE_AXIS_CIRCUMFERENCE;
-    }
 
     /**
      * reset the sensors
