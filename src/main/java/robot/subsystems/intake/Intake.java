@@ -97,11 +97,17 @@ public class Intake extends Subsystem {
         proximitySensor.resetAccumulator();
     }
 
+    /**
+     * lock the intake arms
+     */
     public void setClose() {
         close.set(DoubleSolenoid.Value.kForward);
         open.set(DoubleSolenoid.Value.kReverse);
     }
 
+    /**
+     * release the intake arms
+     */
     public void setOpen() {
         close.set(DoubleSolenoid.Value.kReverse);
         open.set(DoubleSolenoid.Value.kForward);
