@@ -8,5 +8,7 @@ public class Ports {
     /****ANALOG-INPUT***/
     public final static int proximity = 0;
     public final static int FOLDING_POTENTIOMETER = 0;
-
+    /***Solenoids***/
+    public final static int CloseSoleoid = 3;
+    public final static int OpenSolenoid = 2;
 }

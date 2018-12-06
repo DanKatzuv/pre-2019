@@ -9,6 +9,7 @@ package robot.subsystems.intake;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -22,6 +23,8 @@ public class Intake extends Subsystem {
     private final VictorSP rightIntake = new VictorSP(Ports.RightIntake);
     private final AnalogInput proximitySensor = new AnalogInput(Ports.proximity);
     private final VictorSP folding = new VictorSP(Ports.Folding);
+    private final DoubleSolenoid close = new DoubleSolenoid(Ports.CloseSoleoid, Ports.CloseSoleoid);
+    private final DoubleSolenoid open = new DoubleSolenoid(Ports.OpenSolenoid, Ports.OpenSolenoid);
     private final AnalogPotentiometer foldingEncoder = new AnalogPotentiometer(Ports.FOLDING_POTENTIOMETER);
 
 
@@ -94,4 +97,13 @@ public class Intake extends Subsystem {
         proximitySensor.resetAccumulator();
     }
 
+    public void setClose() {
+        close.set(DoubleSolenoid.Value.kForward);
+        open.set(DoubleSolenoid.Value.kReverse);
+    }
+
+    public void setOpen() {
+        close.set(DoubleSolenoid.Value.kReverse);
+        open.set(DoubleSolenoid.Value.kForward);
+    }
 }
