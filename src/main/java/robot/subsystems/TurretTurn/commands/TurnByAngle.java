@@ -44,9 +44,9 @@ public class TurnByAngle extends Command {
             this.desiredAngle += startAngle;
         }
         if (desiredAngle - startAngle <= 180)
-            this.arcLength = (Constants.SHOOTER_BASE_PERIMITER * Math.PI) * ((desiredAngle - startAngle) / 360);
+            this.arcLength = (desiredAngle - startAngle);
         else
-            this.arcLength = (Constants.SHOOTER_BASE_PERIMITER * Math.PI) * ((desiredAngle - startAngle - 360) / 360);
+            this.arcLength = (desiredAngle - startAngle - 360);
         Robot.turretTurn.setDesiredAngle(this.arcLength);
     }
 

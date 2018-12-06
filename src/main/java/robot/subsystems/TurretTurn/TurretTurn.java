@@ -34,7 +34,7 @@ public class TurretTurn extends Subsystem {
      * @author lior
      */
     public void setDesiredAngle(double positionToTurn){
-        Motor.set(ControlMode.MotionMagic, positionToTurn);
+        Motor.set(ControlMode.MotionMagic, (Constants.SHOOTER_BASE_PERIMITER * Math.PI) * positionToTurn / 360);
     }
     /**
      * the method uses the input scale calculated with the maximum voltage possible and the maximum degreees to calculate the current angle
