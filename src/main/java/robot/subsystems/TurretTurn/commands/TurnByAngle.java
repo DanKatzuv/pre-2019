@@ -38,9 +38,11 @@ public class TurnByAngle extends Command {
     protected void execute() {
         startAngle = Robot.turretTurn.getAngle();
         if (this.isRelative) {
-            if (startAngle + this.desiredAngle >= Constants.MAX_DEGREE ||
-                    startAngle + this.desiredAngle <= Constants.MIN_DEGREE)
+            if (startAngle + this.desiredAngle >= Constants.MAX_DEGREE)
                 this.desiredAngle += startAngle - 360;
+            if (startAngle + this.desiredAngle <= Constants.MIN_DEGREE)
+                this.desiredAngle += startAngle + 360;
+            else
             this.desiredAngle += startAngle;
         }
         if (desiredAngle - startAngle <= 180)
