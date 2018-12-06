@@ -6,4 +6,8 @@ public class Constants {
     static final double MID_DEGREE = 1800;
     static final double VOLT_DEGREE_PROPORTION = 1/720;
     public static final double SHOOTER_BASE_PERIMITER = 0.2996091;
+    public static final int kSlotIdx = 0;
+    public static final int kPIDLoopIdx = 0;
+    public static final int kTimeoutMs = 30;
+    public static final double kF = 0, kP = 0, kI = 0, kD = 0;
 }
