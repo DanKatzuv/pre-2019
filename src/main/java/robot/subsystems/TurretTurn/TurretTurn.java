@@ -28,19 +28,23 @@ public class TurretTurn extends Subsystem {
         // Set the default command for a subsystem here.
         // setDefaultCommand(new MySpecialCommand());
     }
+
     /**
      * the method uses a talon controlMode to set the amount of distance it needs to turn to get to the desired position
+     *
      * @param positionToTurn the distance the motors need to turn, the arc of the degree we want to turn in
      * @author lior
      */
-    public void setDesiredAngle(double positionToTurn){
-        Motor.set(ControlMode.MotionMagic, positionToTurn);
+    public void setDesiredAngle(double positionToTurn) {
+        Motor.set(ControlMode.MotionMagic, (Constants.SHOOTER_BASE_PERIMITER * Math.PI) * positionToTurn / 360);
     }
+
     /**
      * the method uses the input scale calculated with the maximum voltage possible and the maximum degreees to calculate the current angle
+     *
      * @author Lior
      */
-    public double getAngle(){
+    public double getAngle() {
         return potentiometer.get();
     }
 

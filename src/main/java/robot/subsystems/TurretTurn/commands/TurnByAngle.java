@@ -11,7 +11,6 @@ import robot.subsystems.TurretTurn.TurretTurn;
 public class TurnByAngle extends Command {
     private double desiredAngle;
     private double startAngle;
-    private double angle;
     private double arcLength;
     private boolean isRelative;
     private TurretTurn turretTurn = Robot.turretTurn;
@@ -38,15 +37,17 @@ public class TurnByAngle extends Command {
     protected void execute() {
         startAngle = Robot.turretTurn.getAngle();
         if (this.isRelative) {
-            if (startAngle + this.desiredAngle >= Constants.MAX_DEGREE ||
-                    startAngle + this.desiredAngle <= Constants.MIN_DEGREE)
+            if (startAngle + this.desiredAngle >= Constants.MAX_DEGREE)
                 this.desiredAngle += startAngle - 360;
-            this.desiredAngle += startAngle;
+            if (startAngle + this.desiredAngle <= Constants.MIN_DEGREE)
+                this.desiredAngle += startAngle + 360;
+            else
+                this.desiredAngle += startAngle;
         }
         if (desiredAngle - startAngle <= 180)
-            this.arcLength = (Constants.SHOOTER_BASE_PERIMITER * Math.PI) * ((desiredAngle - startAngle) / 360);
+            this.arcLength = (desiredAngle - startAngle);
         else
-            this.arcLength = (Constants.SHOOTER_BASE_PERIMITER * Math.PI) * ((desiredAngle - startAngle - 360) / 360);
+            this.arcLength = (desiredAngle - startAngle - 360);
         Robot.turretTurn.setDesiredAngle(this.arcLength);
     }
 
