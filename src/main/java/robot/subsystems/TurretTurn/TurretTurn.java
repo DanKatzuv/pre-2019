@@ -32,10 +32,10 @@ public class TurretTurn extends Subsystem {
     /**
      * the method uses a talon controlMode to set the amount of distance it needs to turn to get to the desired position
      *
-     * @param positionToTurn the distance the motors need to turn, the arc of the degree we want to turn in
+     * @param absoluteAngleToTurn the angle the motors need to turn, the arc of the degree we want to turn in
      * @author lior
      */
-    public void setDesiredAngle(double positionToTurn) {
+    public void setDesiredAngle(double absoluteAngleToTurn) {
         Motor.set(ControlMode.MotionMagic, (Constants.SHOOTER_BASE_PERIMITER * Math.PI) * positionToTurn / 360);
     }
 
