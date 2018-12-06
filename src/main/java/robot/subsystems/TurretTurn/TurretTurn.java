@@ -36,7 +36,11 @@ public class TurretTurn extends Subsystem {
      * @author lior
      */
     public void setDesiredAngle(double absoluteAngleToTurn) {
-        Motor.set(ControlMode.MotionMagic, (Constants.SHOOTER_BASE_PERIMITER * Math.PI) * positionToTurn / 360);
+        if (absoluteAngleToTurn >= Constants.MAX_DEGREE)
+            absoluteAngleToTurn = Constants.MAX_DEGREE - (Constants.MAX_DEGREE - absoluteAngleToTurn) % 360;
+        if (absoluteAngleToTurn <= Constants.MIN_DEGREE)
+            absoluteAngleToTurn = Constants.MIN_DEGREE + 360 - (Constants.MIN_DEGREE - absoluteAngleToTurn) % 360;
+        Motor.set(ControlMode.MotionMagic, (Constants.SHOOTER_BASE_PERIMITER * Math.PI) * absoluteAngleToTurn / 360);
     }
 
     /**
