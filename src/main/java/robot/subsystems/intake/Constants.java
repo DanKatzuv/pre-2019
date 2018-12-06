@@ -10,4 +10,5 @@ public class Constants {
     final static double MIN_PROXIMITY = 0;
     private final static double AXIS_DIAMETER = (1.27) / 100;
     public final static double INTAKE_AXIS_CIRCUMFERENCE = AXIS_DIAMETER * Math.PI;
+    public final static int WAIT_FOR_SELONOIDS = 1;
 }
