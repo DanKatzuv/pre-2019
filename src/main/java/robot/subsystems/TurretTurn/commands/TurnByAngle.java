@@ -20,9 +20,13 @@ public class TurnByAngle extends Command {
      * @author Lior
      */
     public TurnByAngle(double desiredAngle, boolean isRelative) {
+        requires(turret);
+        
         this.isRelative = isRelative;
         this.desiredAngle = desiredAngle;
-        requires(turretTurn);
+
+        if (this.isRelative)
+            this.desiredAngle += startAngle;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -34,14 +38,13 @@ public class TurnByAngle extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        startAngle = Robot.turretTurn.getAngle();
-        if (this.isRelative)
-                this.desiredAngle += startAngle;
+        startAngle = Robot.turret.getAngle();
+
         if (desiredAngle - startAngle <= 180)
             this.absoluteAngle = (desiredAngle - startAngle);
         else
             this.absoluteAngle = (desiredAngle - startAngle - 360);
-        Robot.turretTurn.setDesiredAngle(this.absoluteAngle);
+        Robot.turret.setDesiredAngle(this.absoluteAngle);
     }
 
     // Make this return true when this Command no longer needs to run execute()
