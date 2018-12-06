@@ -16,7 +16,7 @@ import robot.subsystems.TurretTurn.commands.TurnByAngle;
 /**
  * An example subsystem.  You can replace me with your own Subsystem.
  */
-public class TurretTurn extends Subsystem {
+public class Turret extends Subsystem {
     public final TalonSRX Motor = new TalonSRX(Ports.Motor);
     private final AnalogPotentiometer potentiometer = new AnalogPotentiometer(Ports.Potentiometer, Constants.VOLT_DEGREE_PROPORTION);
     // Put methods for controlling this subsystem
@@ -32,7 +32,7 @@ public class TurretTurn extends Subsystem {
     /**
      * the method uses a talon controlMode to set the amount of distance it needs to turn to get to the desired position
      *
-     * @param absoluteAngleToTurn the angle the motors need to turn, the arc of the degree we want to turn in
+     * @param absoluteAngleToTurn the angle the motors need to turn, the degree we want to turn in
      * @author lior
      */
     public void setDesiredAngle(double absoluteAngleToTurn) {

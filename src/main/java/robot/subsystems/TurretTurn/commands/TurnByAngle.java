@@ -2,8 +2,7 @@ package robot.subsystems.TurretTurn.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import robot.Robot;
-import robot.subsystems.TurretTurn.Constants;
-import robot.subsystems.TurretTurn.TurretTurn;
+import robot.subsystems.TurretTurn.Turret;
 
 /**
  *
@@ -11,9 +10,9 @@ import robot.subsystems.TurretTurn.TurretTurn;
 public class TurnByAngle extends Command {
     private double desiredAngle;
     private double startAngle;
-    private double arcLength;
+    private double absoluteAngle;
     private boolean isRelative;
-    private TurretTurn turretTurn = Robot.turretTurn;
+    private Turret turret = Robot.turret;
 
     /**
      * @param desiredAngle the angle you want to turn in
@@ -39,10 +38,10 @@ public class TurnByAngle extends Command {
         if (this.isRelative)
                 this.desiredAngle += startAngle;
         if (desiredAngle - startAngle <= 180)
-            this.arcLength = (desiredAngle - startAngle);
+            this.absoluteAngle = (desiredAngle - startAngle);
         else
-            this.arcLength = (desiredAngle - startAngle - 360);
-        Robot.turretTurn.setDesiredAngle(this.arcLength);
+            this.absoluteAngle = (desiredAngle - startAngle - 360);
+        Robot.turretTurn.setDesiredAngle(this.absoluteAngle);
     }
 
     // Make this return true when this Command no longer needs to run execute()

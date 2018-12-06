@@ -22,7 +22,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.subsystems.TurretTurn.Constants;
 import robot.subsystems.TurretTurn.Ports;
-import robot.subsystems.TurretTurn.TurretTurn;
+import robot.subsystems.TurretTurn.Turret;
 import robot.subsystems.drivetrain.Drivetrain;
 
 /**
@@ -34,7 +34,7 @@ import robot.subsystems.drivetrain.Drivetrain;
  */
 public class Robot extends TimedRobot {
     public static final Drivetrain drivetrain = new Drivetrain();
-    public static final TurretTurn turretTurn = new TurretTurn();
+    public static final Turret turret = new Turret();
     public static AHRS navx = new AHRS(SPI.Port.kMXP);
     public static OI m_oi;
     TalonSRX Motor = new TalonSRX(Ports.Motor);
