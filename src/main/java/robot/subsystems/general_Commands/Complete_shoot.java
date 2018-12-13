@@ -12,8 +12,8 @@ import robot.subsystems.shooter.commands.Shoot;
 public class Complete_shoot  extends CommandGroup {
 
     public Complete_shoot (double desired_angle,boolean is_relative, double NTspeed, double timeout) {
+        addParallel(new ConveyorCommand());//  move ball to turret TODO: check if making this parallel will cause problems
         addSequential(new TurnByAngle(desired_angle,is_relative));//  aim to target
-        addSequential(new ConveyorCommand());//  move ball to turret
         addSequential(new Shoot(NTspeed,timeout));//then shoot
         // Add Commands here:
         // e.g. addSequential(new Command1());
