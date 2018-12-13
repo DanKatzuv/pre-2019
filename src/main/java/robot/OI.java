@@ -8,16 +8,25 @@
 package robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import robot.subsystems.intake.Commands.FoldAndIntake;
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-    public Joystick leftStick = new Joystick(0);
-    public Joystick rightStick = new Joystick(1);
+    public final Joystick leftStick = new Joystick(0);
+    public final Joystick rightStick = new Joystick(1);
+    final XboxController xcontroller = new XboxController(2);
 
+    Button a = new JoystickButton(xcontroller, 0);
 
+    public OI() {
+        a.whenPressed(new FoldAndIntake());
+    }
     //// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a
     //// joystick.
