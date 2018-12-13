@@ -7,13 +7,22 @@
 
 package robot;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import robot.subsystems.TurretTurn.Constants;
+import robot.subsystems.TurretTurn.Ports;
+import robot.subsystems.TurretTurn.Turret;
 import robot.subsystems.conveyer.Conveyor;
 import robot.subsystems.drivetrain.Drivetrain;
 
@@ -26,12 +35,12 @@ import robot.subsystems.drivetrain.Drivetrain;
  */
 public class Robot extends TimedRobot {
     public static final Drivetrain drivetrain = new Drivetrain();
+    public static final Turret turret = new Turret();
     public static final Conveyor conveyor = new Conveyor();
     public static AHRS navx = new AHRS(SPI.Port.kMXP);
-
-
     public static OI m_oi;
-
+    TalonSRX Motor = new TalonSRX(Ports.Motor);
+    NetworkTableEntry degreeToTurnEntry;
     Command m_autonomousCommand;
     SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -45,6 +54,32 @@ public class Robot extends TimedRobot {
         //m_chooser.setDefaultOption("Default Auto", new JoystickDrive());
         // chooser.addOption("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", m_chooser);
+        NetworkTableInstance degreeInstance = NetworkTableInstance.getDefault();
+        NetworkTable table = degreeInstance.getTable("degrees from image detection");
+        degreeToTurnEntry = table.getEntry("degree");
+        Motor.configSelectedFeedbackSensor(FeedbackDevice.Analog, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+        Motor.setSensorPhase(true);
+        Motor.setInverted(false);
+
+        Motor.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, Constants.kTimeoutMs);
+        Motor.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, Constants.kTimeoutMs);
+
+        Motor.configNominalOutputForward(0, Constants.kTimeoutMs);
+        Motor.configNominalOutputReverse(0, Constants.kTimeoutMs);
+        Motor.configPeakOutputForward(1, Constants.kTimeoutMs);
+        Motor.configPeakOutputReverse(-1, Constants.kTimeoutMs);
+
+        Motor.selectProfileSlot(Constants.kSlotIdx, Constants.kPIDLoopIdx);
+        Motor.config_kF(0, Constants.kF, Constants.kTimeoutMs);
+        Motor.config_kP(0, Constants.kP, Constants.kTimeoutMs);
+        Motor.config_kI(0, Constants.kI, Constants.kTimeoutMs);
+        Motor.config_kD(0, Constants.kD, Constants.kTimeoutMs);
+
+        Motor.configMotionCruiseVelocity(15000, Constants.kTimeoutMs);
+        Motor.configMotionAcceleration(6000, Constants.kTimeoutMs);
+
+        Motor.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+
     }
 
     /**
@@ -129,6 +164,7 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+
     }
 
     /**
