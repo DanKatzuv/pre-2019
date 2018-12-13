@@ -25,6 +25,7 @@ import robot.subsystems.TurretTurn.Ports;
 import robot.subsystems.TurretTurn.Turret;
 import robot.subsystems.conveyer.Conveyor;
 import robot.subsystems.drivetrain.Drivetrain;
+import robot.subsystems.shooter.Shooter;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -35,6 +36,7 @@ import robot.subsystems.drivetrain.Drivetrain;
  */
 public class Robot extends TimedRobot {
     public static final Drivetrain drivetrain = new Drivetrain();
+    public static final Shooter shooter = new Shooter();
     public static final Turret turret = new Turret();
     public static final Conveyor conveyor = new Conveyor();
     public static AHRS navx = new AHRS(SPI.Port.kMXP);
