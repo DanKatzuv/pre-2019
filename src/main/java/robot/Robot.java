@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import robot.subsystems.conveyer.Conveyor;
 import robot.subsystems.drivetrain.Drivetrain;
 
 /**
@@ -25,6 +26,7 @@ import robot.subsystems.drivetrain.Drivetrain;
  */
 public class Robot extends TimedRobot {
     public static final Drivetrain drivetrain = new Drivetrain();
+    public static final Conveyor conveyor = new Conveyor();
     public static AHRS navx = new AHRS(SPI.Port.kMXP);
 
 
